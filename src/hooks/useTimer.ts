@@ -225,13 +225,20 @@ export function useTimer() {
 
     // Browser notification
     if (Notification.permission === "granted") {
-      const msg =
-        mode === "pomodoro"
-          ? "🍅 Pomodoro complete! Time for a break."
-          : "⏰ Break over! Back to work.";
-      new Notification("FocusFlow", { body: msg });
-    }
+      try {
+        const msg =
+          mode === "pomodoro"
+            ? "🍅 Pomodoro complete! Time for a break."
+            : "⏰ Break over! Back to work.";
 
+        new Notification("FocusFlow", {
+          body: msg,
+          icon: "/favicon.png",
+        });
+      } catch (error) {
+        console.error("Notification failed:", error);
+      }
+    }
     if (mode === "pomodoro") {
       const newCount = pomodoroCount + 1;
       const newTotal = totalPomodoros + 1;
