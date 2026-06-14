@@ -225,16 +225,27 @@ export function useTimer() {
 
     // Browser notification
     if (Notification.permission === "granted") {
+      alert("Reached notification code");
+
       try {
         const msg =
           mode === "pomodoro"
             ? "🍅 Pomodoro complete! Time for a break."
             : "⏰ Break over! Back to work.";
 
-        new Notification("FocusFlow", {
+        const notification = new Notification("FocusFlow", {
           body: msg,
         });
+
+        notification.onshow = () => {
+          alert("Notification was shown successfully");
+        };
+
+        notification.onerror = () => {
+          alert("Notification error occurred");
+        };
       } catch (error) {
+        alert("Notification failed: " + String(error));
         console.error("Notification failed:", error);
       }
     }
