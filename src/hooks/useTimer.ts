@@ -229,7 +229,7 @@ export function useTimer() {
         mode === "pomodoro"
           ? "🍅 Pomodoro complete! Time for a break."
           : "⏰ Break over! Back to work.";
-      new Notification("FocusFlow", { body: msg, icon: "/favicon.png" });
+      new Notification("FocusFlow", { body: msg });
     }
 
     if (mode === "pomodoro") {
