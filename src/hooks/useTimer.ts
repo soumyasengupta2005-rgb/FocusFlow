@@ -217,7 +217,7 @@ export function useTimer() {
       audioCtxRef.current?.close();
     } catch {}
   }, []);
-  const handleTimerComplete = useCallback(() => {
+  const handleTimerComplete = useCallback(async () => {
     setIsRunning(false);
     if (intervalRef.current) clearInterval(intervalRef.current);
 
@@ -231,7 +231,9 @@ export function useTimer() {
             ? "🍅 Pomodoro complete! Time for a break."
             : "⏰ Break over! Back to work.";
 
-        new Notification("FocusFlow", {
+        const registration = await navigator.serviceWorker.ready;
+
+        registration.showNotification("FocusFlow", {
           body: msg,
         });
       } catch (error) {
