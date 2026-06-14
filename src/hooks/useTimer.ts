@@ -233,7 +233,6 @@ export function useTimer() {
 
         new Notification("FocusFlow", {
           body: msg,
-          icon: "/favicon.png",
         });
       } catch (error) {
         console.error("Notification failed:", error);
